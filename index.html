@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Боковое меню -->
     <aside class="sidebar">
         <h2 class="logo">⚒️ Albion Calc</h2>
         <nav>
@@ -22,50 +21,58 @@
         </nav>
     </aside>
 
-    <!-- Основная область -->
     <main class="main-content">
         <h1>Калькулятор крафта</h1>
 
-        <!-- Выбор города -->
+        <!-- Город и бонус -->
         <div class="city-select">
-            <label>Город:</label>
+            <label>Город (бонус RRR):</label>
             <select id="city">
                 <option value="0">Без бонуса (0%)</option>
-                <option value="15">Лимхерст (15%)</option>
-                <option value="15">Мартлок (15%)</option>
-                <option value="15">Тетфорд (15%)</option>
-                <option value="15">Форт Стерлинг (15%)</option>
-                <option value="15">Бриджуотч (15%)</option>
-                <option value="25">Кэрлеон (25%)</option>
+                <option value="15.2">Лимхерст (15.2%)</option>
+                <option value="15.2">Мартлок (15.2%)</option>
+                <option value="15.2">Тетфорд (15.2%)</option>
+                <option value="15.2">Форт Стерлинг (15.2%)</option>
+                <option value="15.2">Бриджуотч (15.2%)</option>
+                <option value="24.8">Кэрлеон (24.8%)</option>
             </select>
         </div>
 
-        <!-- Поля ресурсов -->
+        <!-- Ресурсы -->
         <div class="resources-grid">
             <div class="resource-row">
                 <span class="icon">🪨</span>
-                <input type="number" id="ore" placeholder="Цена руды" tabindex="1">
+                <input type="number" id="ore" placeholder="Цена руды (за шт)" tabindex="1">
             </div>
             <div class="resource-row">
                 <span class="icon">🧵</span>
-                <input type="number" id="cloth" placeholder="Цена ткани" tabindex="2">
+                <input type="number" id="cloth" placeholder="Цена ткани (за шт)" tabindex="2">
             </div>
             <div class="resource-row">
                 <span class="icon">🪵</span>
-                <input type="number" id="wood" placeholder="Цена дерева" tabindex="3">
+                <input type="number" id="wood" placeholder="Цена дерева (за шт)" tabindex="3">
             </div>
             <div class="resource-row">
                 <span class="icon">🦴</span>
-                <input type="number" id="leather" placeholder="Цена кожи" tabindex="4">
+                <input type="number" id="leather" placeholder="Цена кожи (за шт)" tabindex="4">
             </div>
         </div>
 
-        <!-- Настройки -->
+        <!-- Настройки крафта -->
         <div class="settings">
-            <label><input type="checkbox" id="focus"> Использовать фокус</label>
-            <div class="station-fee">
-                <label>Плата за станцию (%):</label>
-                <input type="number" id="fee" value="5" min="0" max="100">
+            <label><input type="checkbox" id="focus"> Использовать фокус (+30% RRR)</label>
+        </div>
+
+        <div class="settings-row">
+            <div class="setting-field">
+                <label>Ставка станции (Tax, %):</label>
+                <input type="number" id="taxRate" value="150" min="0" placeholder="Например: 150">
+                <span class="hint">Устанавливает владелец станции</span>
+            </div>
+            <div class="setting-field">
+                <label>Базовая стоимость (Item Value):</label>
+                <input type="number" id="itemValue" value="54" min="0" placeholder="Скрытый параметр игры">
+                <span class="hint">Можно найти в справочниках</span>
             </div>
         </div>
 
@@ -80,15 +87,23 @@
 
         <!-- Результаты -->
         <div class="results" id="results" style="display: none;">
-            <div class="result-card" id="costCard">
-                <span class="label">Себестоимость</span>
+            <div class="result-card">
+                <span class="label">Стоимость материалов</span>
+                <span class="value" id="materialsCost">0</span>
+            </div>
+            <div class="result-card">
+                <span class="label">Плата за станцию</span>
+                <span class="value" id="stationFeeDisplay">0</span>
+            </div>
+            <div class="result-card">
+                <span class="label">Себестоимость (с RRR)</span>
                 <span class="value" id="costValue">0</span>
             </div>
-            <div class="result-card" id="profitCard">
+            <div class="result-card">
                 <span class="label">Чистая прибыль</span>
                 <span class="value" id="profitValue">0</span>
             </div>
-            <div class="result-card" id="marginCard">
+            <div class="result-card">
                 <span class="label">Маржа</span>
                 <span class="value" id="marginValue">0%</span>
             </div>
