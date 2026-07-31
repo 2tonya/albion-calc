@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albion Online — Калькулятор крафта</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Боковое меню -->
+    <aside class="sidebar">
+        <h2 class="logo">⚒️ Albion Calc</h2>
+        <nav>
+            <div class="menu-category active">📦 Материалы</div>
+            <div class="menu-sub active">— Изысканные</div>
+            <div class="menu-sub">— Разное (Misc)</div>
+            <div class="menu-sub">— Энергия Авалона</div>
+            <div class="menu-category">🎣 Рыбалка</div>
+            <div class="menu-category">👢 Обувь</div>
+            <div class="menu-category">🧥 Доспехи</div>
+            <div class="menu-category">⚔️ Оружие</div>
+        </nav>
+    </aside>
+
+    <!-- Основная область -->
+    <main class="main-content">
+        <h1>Калькулятор крафта</h1>
+
+        <!-- Выбор города -->
+        <div class="city-select">
+            <label>Город:</label>
+            <select id="city">
+                <option value="0">Без бонуса (0%)</option>
+                <option value="15">Лимхерст (15%)</option>
+                <option value="15">Мартлок (15%)</option>
+                <option value="15">Тетфорд (15%)</option>
+                <option value="15">Форт Стерлинг (15%)</option>
+                <option value="15">Бриджуотч (15%)</option>
+                <option value="25">Кэрлеон (25%)</option>
+            </select>
+        </div>
+
+        <!-- Поля ресурсов -->
+        <div class="resources-grid">
+            <div class="resource-row">
+                <span class="icon">🪨</span>
+                <input type="number" id="ore" placeholder="Цена руды" tabindex="1">
+            </div>
+            <div class="resource-row">
+                <span class="icon">🧵</span>
+                <input type="number" id="cloth" placeholder="Цена ткани" tabindex="2">
+            </div>
+            <div class="resource-row">
+                <span class="icon">🪵</span>
+                <input type="number" id="wood" placeholder="Цена дерева" tabindex="3">
+            </div>
+            <div class="resource-row">
+                <span class="icon">🦴</span>
+                <input type="number" id="leather" placeholder="Цена кожи" tabindex="4">
+            </div>
+        </div>
+
+        <!-- Настройки -->
+        <div class="settings">
+            <label><input type="checkbox" id="focus"> Использовать фокус</label>
+            <div class="station-fee">
+                <label>Плата за станцию (%):</label>
+                <input type="number" id="fee" value="5" min="0" max="100">
+            </div>
+        </div>
+
+        <!-- Цена предмета -->
+        <div class="item-price">
+            <label>Цена предмета на рынке:</label>
+            <input type="number" id="itemPrice" placeholder="В серебре">
+        </div>
+
+        <!-- Кнопка -->
+        <button id="calculate">Рассчитать</button>
+
+        <!-- Результаты -->
+        <div class="results" id="results" style="display: none;">
+            <div class="result-card" id="costCard">
+                <span class="label">Себестоимость</span>
+                <span class="value" id="costValue">0</span>
+            </div>
+            <div class="result-card" id="profitCard">
+                <span class="label">Чистая прибыль</span>
+                <span class="value" id="profitValue">0</span>
+            </div>
+            <div class="result-card" id="marginCard">
+                <span class="label">Маржа</span>
+                <span class="value" id="marginValue">0%</span>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
