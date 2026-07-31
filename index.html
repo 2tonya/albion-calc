@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <aside class="sidebar">
+    <button class="burger" id="burger">☰</button>
+    <aside class="sidebar" id="sidebar">
         <h2 class="logo">⚒️ Albion Calc</h2>
         <nav>
             <div class="menu-category active">📦 Материалы</div>
@@ -24,7 +25,13 @@
     <main class="main-content">
         <h1>Калькулятор крафта</h1>
 
-        <!-- Город и бонус -->
+        <div class="field-block">
+            <label>Предмет для крафта:</label>
+            <select id="itemSelect">
+                <option value="">— выберите предмет —</option>
+            </select>
+        </div>
+
         <div class="city-select">
             <label>Город (бонус RRR):</label>
             <select id="city">
@@ -38,27 +45,29 @@
             </select>
         </div>
 
-        <!-- Ресурсы -->
         <div class="resources-grid">
             <div class="resource-row">
                 <span class="icon">🪨</span>
-                <input type="number" id="ore" placeholder="Цена руды (за шт)" tabindex="1">
+                <input type="number" id="ore" placeholder="Цена руды (за шт)" min="0" tabindex="1">
+                <span class="qty-badge" id="oreQty">×0</span>
             </div>
             <div class="resource-row">
                 <span class="icon">🧵</span>
-                <input type="number" id="cloth" placeholder="Цена ткани (за шт)" tabindex="2">
+                <input type="number" id="cloth" placeholder="Цена ткани (за шт)" min="0" tabindex="2">
+                <span class="qty-badge" id="clothQty">×0</span>
             </div>
             <div class="resource-row">
                 <span class="icon">🪵</span>
-                <input type="number" id="wood" placeholder="Цена дерева (за шт)" tabindex="3">
+                <input type="number" id="wood" placeholder="Цена дерева (за шт)" min="0" tabindex="3">
+                <span class="qty-badge" id="woodQty">×0</span>
             </div>
             <div class="resource-row">
                 <span class="icon">🦴</span>
-                <input type="number" id="leather" placeholder="Цена кожи (за шт)" tabindex="4">
+                <input type="number" id="leather" placeholder="Цена кожи (за шт)" min="0" tabindex="4">
+                <span class="qty-badge" id="leatherQty">×0</span>
             </div>
         </div>
 
-        <!-- Настройки крафта -->
         <div class="settings">
             <label><input type="checkbox" id="focus"> Использовать фокус (+30% RRR)</label>
         </div>
@@ -76,38 +85,67 @@
             </div>
         </div>
 
-        <!-- Цена предмета -->
         <div class="item-price">
             <label>Цена предмета на рынке:</label>
-            <input type="number" id="itemPrice" placeholder="В серебре">
+            <input type="number" id="itemPrice" min="0" placeholder="В серебре">
         </div>
 
-        <!-- Кнопка -->
-        <button id="calculate">Рассчитать</button>
+        <div class="buttons-row">
+            <button id="calculate">Рассчитать</button>
+            <button id="clearAll" class="btn-secondary">Очистить всё</button>
+            <button id="saveHistory" class="btn-secondary">Сохранить в историю</button>
+        </div>
 
-        <!-- Результаты -->
-        <div class="results" id="results" style="display: none;">
+        <div class="results" id="results">
             <div class="result-card">
                 <span class="label">Стоимость материалов</span>
-                <span class="value" id="materialsCost">0</span>
+                <span class="value" id="materialsCost">—</span>
             </div>
             <div class="result-card">
                 <span class="label">Плата за станцию</span>
-                <span class="value" id="stationFeeDisplay">0</span>
+                <span class="value" id="stationFeeDisplay">—</span>
             </div>
             <div class="result-card">
                 <span class="label">Себестоимость (с RRR)</span>
-                <span class="value" id="costValue">0</span>
+                <span class="value" id="costValue">—</span>
             </div>
             <div class="result-card">
                 <span class="label">Чистая прибыль</span>
-                <span class="value" id="profitValue">0</span>
+                <span class="value" id="profitValue">—</span>
             </div>
             <div class="result-card">
                 <span class="label">Маржа</span>
-                <span class="value" id="marginValue">0%</span>
+                <span class="value" id="marginValue">—</span>
+            </div>
+            <div class="result-card">
+                <span class="label">Рекомендация</span>
+                <span class="value" id="recommendValue">—</span>
             </div>
         </div>
+
+        <table class="details-table" id="detailsTable">
+            <thead>
+                <tr>
+                    <th>Ресурс</th>
+                    <th>Кол-во</th>
+                    <th>Цена/шт</th>
+                    <th>Стоимость</th>
+                    <th>Вернулось (RRR)</th>
+                    <th>Итого</th>
+                </tr>
+            </thead>
+            <tbody id="detailsBody"></tbody>
+        </table>
+
+        <section class="history-section">
+            <div class="history-header">
+                <h2>📋 История расчётов</h2>
+                <button id="clearHistory" class="btn-secondary">Очистить историю</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <p class="empty-history">Пока пусто. Сделайте расчёт и нажмите «Сохранить в историю».</p>
+            </div>
+        </section>
     </main>
 
     <script src="script.js"></script>
